@@ -11,7 +11,7 @@ public class ExactPublish {
         MqttClient client = new MqttClient("tcp://test.mosquitto.org", MqttClient.generateClientId());
         client.connect();
 
-        client.publish(HOME_ID + "display/message",
+        client.publish(HOME_ID + "/message",
                 "Bienvenido!".getBytes(),
                 2,
                 false);

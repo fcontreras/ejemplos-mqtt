@@ -1,5 +1,7 @@
 package org.jugnicaragua.mosquittoclient;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonParser;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
@@ -14,9 +16,10 @@ public class ItsRaining {
 
         client.subscribe(HOME_ID + "/raindrop/status", (topic, message) -> {
             System.out.println("Message: " + new String(message.getPayload()));
+            int water = JsonParser.parseString(new String(message.getPayload()))
+                    .getAsJsonObject().get("water").getAsInt();
 
-            int raindrop = Integer.parseInt(new String(message.getPayload()));
-            if (raindrop > 800) {
+            if (water > 1000) {
                 System.out.println("It's Raining");
                 client.publish(HOME_ID + "/window/position",
                         "CLOSE".getBytes(),

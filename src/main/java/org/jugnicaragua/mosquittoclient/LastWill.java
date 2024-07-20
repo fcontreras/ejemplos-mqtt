@@ -11,21 +11,18 @@ public class LastWill {
     public static void main(String[] args) throws MqttException, InterruptedException {
         MqttClient client = new MqttClient("tcp://test.mosquitto.org", MqttClient.generateClientId());
         MqttConnectOptions options = new MqttConnectOptions();
-        options.setWill("/buzzer/play", "long-bip".getBytes(), 2, true);
+        options.setWill(HOME_ID + "/buzzer/play", "long-bip".getBytes(), 1, false);
 
-        client.connect();
+        client.connect(options);
 
-        for (int i = 0; i < 10; i++) {
+        while (true) {
             client.publish(HOME_ID + "/buzzer/play",
                     "bip".getBytes(),
                     1,
-                    true);
+                    false);
             System.out.println("Message published");
             Thread.sleep(1000); // Wait for 1 second
         }
-
-        System.out.println("Message published");
-        client.disconnect();
     }
 
 }

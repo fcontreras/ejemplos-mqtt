@@ -13,10 +13,10 @@ public class RetainPublish {
         MqttClient client = new MqttClient("tcp://test.mosquitto.org", MqttClient.generateClientId());
         client.connect();
 
-        client.publish(HOME_ID + "display/message",
+        client.publish(HOME_ID + "/display/message",
                 ("     JCONF         Dominicana   ").getBytes(),
                 1,
-                true);
+                false);
 
         System.out.println("Message published");
         client.disconnect();

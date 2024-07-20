@@ -12,7 +12,7 @@ public class SimplePublish {
         client.connect();
 
         client.publish(HOME_ID + "/fan/power",
-                "OFF".getBytes(),
+                "ON".getBytes(),
                 1,
                 false);
         System.out.println("Message published");

@@ -28,13 +28,13 @@ public class WildcardSubscribe {
 //        client.subscribe(topics);
 //        client.setCallback(new Callback());
 
-//        client.subscribe(HOME_ID + "/+/status", (topic, message) -> {
-//            System.out.println("Message: " + new String(message.getPayload()));
-//        });
-
-        client.subscribe(HOME_ID + "/temp_hum/#",(topic, message) -> {
+        client.subscribe(HOME_ID + "/temp_hum/+/status", (topic, message) -> {
             System.out.println("Message: " + new String(message.getPayload()));
         });
+
+//        client.subscribe(HOME_ID + "/#/status",(topic, message) -> {
+//            System.out.println("Message: " + new String(message.getPayload()));
+//        });
     }
 
     private void processMessage(String topic, MqttMessage message) {
